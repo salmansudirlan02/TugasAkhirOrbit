@@ -5,13 +5,15 @@
 from flask import Flask,render_template,request,jsonify
 import pandas as pd
 import numpy as np
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import ExtraTreeClassifier
 from joblib import load
 
 # =[Variabel Global]=============================
 
 app   = Flask(__name__, static_url_path='/static')
-model = load('extra_tree.model')
+import os
+print(f'INI DIRECTORY ROOT {os.getcwd()}')
+model = load('app/extra_tree.model')
 
 # =[Routing]=====================================
 
@@ -55,7 +57,7 @@ def apiDeteksi():
 		# Return hasil prediksi dengan format JSON
 		return jsonify({
 			"prediksi": hasil_prediksi
-			# "gambar_prediksi" : gambar_prediksi
+			
 		})
 		
 	
@@ -65,10 +67,9 @@ def apiDeteksi():
 if __name__ == '__main__':
 	
 	# Load model yang telah ditraining
-	# model = load('model_iris_dt.model')
 
 	# Run Flask di localhost 
-	app.run(host="localhost", port=5000, debug=True)
+	app.run(host="localhost", port=5925, debug=False)
 	
 	
 
